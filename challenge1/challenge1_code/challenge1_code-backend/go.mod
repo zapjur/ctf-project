@@ -1,4 +1,4 @@
-module challenge1_code
+module challenge1_code-backend
 
 go 1.23.1
 

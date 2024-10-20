@@ -10,17 +10,26 @@ import (
 
 var db *sql.DB
 
-func loginHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method != http.MethodPost {
-		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
-		return
-	}
+func corsMiddleware(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		next.ServeHTTP(w, r)
+	})
+}
+
+func loginHandler(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
 	password := r.FormValue("password")
 
 	var dbPassword string
-
 	query := "SELECT password FROM users WHERE username = '" + username + "'"
 	fmt.Println("Executing query:", query)
 	err := db.QueryRow(query).Scan(&dbPassword)
@@ -42,8 +51,12 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	http.Error(w, "Invalid username or password", http.StatusUnauthorized)
 }
 
-func main() {
+func hintHandler(w http.ResponseWriter, r *http.Request) {
+	hint := "SELECT password FROM users WHERE username = '<username>'"
+	fmt.Fprintf(w, "Hint: The query used is: %s", hint)
+}
 
+func main() {
 	var err error
 	db, err = sql.Open("sqlite3", "./users.db")
 	if err != nil {
@@ -65,8 +78,11 @@ func main() {
 		log.Println("Admin user already exists, skipping creation.")
 	}
 
-	http.HandleFunc("/login", loginHandler)
-	log.Println("Listening on :8080")
-	http.ListenAndServe(":8080", nil)
+	mux := http.NewServeMux()
+	mux.HandleFunc("/login", loginHandler)
+	mux.HandleFunc("/hint", hintHandler)
 
+	handler := corsMiddleware(mux)
+	log.Println("Listening on :8080")
+	http.ListenAndServe(":8080", handler)
 }
