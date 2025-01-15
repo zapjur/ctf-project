@@ -28,25 +28,32 @@ func corsMiddleware(next http.Handler) http.Handler {
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	username := r.FormValue("username")
-	password := r.FormValue("password")
 
-	var dbPassword string
 	query := "SELECT password FROM users WHERE username = '" + username + "'"
 	fmt.Println("Executing query:", query)
-	err := db.QueryRow(query).Scan(&dbPassword)
+
+	rows, err := db.Query(query)
 	if err != nil {
+		log.Println("SQL query error:", err)
 		http.Error(w, "Invalid username or password", http.StatusUnauthorized)
 		return
 	}
+	defer rows.Close()
 
-	if password == dbPassword {
-		fmt.Fprintf(w, "Login successful! Welcome, %s", username)
-		return
-	}
+	for rows.Next() {
+		var dbPassword string
+		err := rows.Scan(&dbPassword)
+		if err != nil {
+			log.Println("Error scanning row:", err)
+			continue
+		}
 
-	if username != "admin" && dbPassword != "" {
-		fmt.Fprintf(w, "Congratulations! You got the flag: %s", dbPassword)
-		return
+		log.Println("dbPassword:", dbPassword)
+
+		if dbPassword == "FLAG{challenge-1-flag-3647932492}" {
+			fmt.Fprintf(w, "Congratulations! You got the flag: %s", dbPassword)
+			return
+		}
 	}
 
 	http.Error(w, "Invalid username or password", http.StatusUnauthorized)
@@ -77,6 +84,19 @@ func main() {
 	_, err = db.Exec(`INSERT INTO users (username, password) VALUES ('admin', 'super_secret_admin_password')`)
 	if err != nil {
 		log.Println("Admin user already exists, skipping creation.")
+	}
+
+	_, err = db.Exec(`CREATE TABLE IF NOT EXISTS flags (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        flag TEXT NOT NULL
+    )`)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	_, err = db.Exec(`INSERT OR IGNORE INTO flags (flag) VALUES ('FLAG{challenge-1-flag-3647932492}')`)
+	if err != nil {
+		log.Println("Flag already exists, skipping creation.")
 	}
 
 	mux := http.NewServeMux()
