@@ -1,6 +1,6 @@
 async function fetchHint() {
     try {
-        const response = await fetch('http://localhost:8080/hint');
+        const response = await fetch('http://localhost:8081/hint');
 
         if (!response.ok) {
             throw new Error('Failed to fetch the hint');

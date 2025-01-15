@@ -4,7 +4,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    const response = await fetch('http://localhost:8080/login', {
+    const response = await fetch('http://localhost:8081/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -16,4 +16,13 @@ document.getElementById('login-form').addEventListener('submit', async function(
     document.getElementById('response').innerText = result;
 });
 
+document.getElementById('hint-btn').addEventListener('click', async () => {
+    try {
+        const response = await fetch('http://localhost:8081/hint');
+        const hint = await response.text();
+        document.getElementById('hint-response').innerText = hint;
+    } catch (error) {
+        console.error('Error fetching hint:', error);
+    }
+});
 

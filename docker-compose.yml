@@ -1,0 +1,14 @@
+version: '3.9'
+
+services:
+  chall-1-backend:
+    build: ./challenge1/challenge1-backend
+    ports:
+      - "8081:8081"
+
+  chall-1-frontend:
+    build: ./challenge1/challenge1-frontend
+    ports:
+      - "81:80"
+    depends_on:
+      - chall-1-backend

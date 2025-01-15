@@ -3,9 +3,10 @@ package main
 import (
 	"database/sql"
 	"fmt"
-	_ "github.com/mattn/go-sqlite3"
 	"log"
 	"net/http"
+
+	_ "github.com/mattn/go-sqlite3"
 )
 
 var db *sql.DB
@@ -83,6 +84,6 @@ func main() {
 	mux.HandleFunc("/hint", hintHandler)
 
 	handler := corsMiddleware(mux)
-	log.Println("Listening on :8080")
-	http.ListenAndServe(":8080", handler)
+	log.Println("Listening on :8081")
+	http.ListenAndServe(":8081", handler)
 }
