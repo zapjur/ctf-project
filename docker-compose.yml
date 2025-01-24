@@ -12,3 +12,8 @@ services:
       - "81:80"
     depends_on:
       - chall-1-backend
+
+  chall-2-backend:
+    build: ./challenge2
+    ports:
+      - "82:80"
