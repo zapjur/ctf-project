@@ -9,16 +9,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['file'])) {
 
     if (in_array($ext, $allowed_ext)) {
         move_uploaded_file($file_tmp, $upload_dir . $file_name);
-        echo "Plik przesłany: <a href='$upload_dir$file_name'>$file_name</a>";
+        echo "File uploaded: <a href='$upload_dir$file_name'>$file_name</a>";
     } else {
-        echo "Niedozwolone rozszerzenie pliku.";
+        echo "Invalid file extension.";
     }
 }
 
 $hints = [
-    "Wskazówka 1: Możesz przesłać plik z rozszerzeniem <code>.php</code> i zobaczyć, co się stanie.",
-    "Wskazówka 2: Flaga znajduje się w pliku <code>flag.txt</code>.",
-    "Wskazówka 3: Pliki są przesyłane do katalogu <code>uploads/</code>.",
+    "Hint 1: You can upload a file with the extension <code>.php</code> and see what happens.",
+    "Hint 2: The flag is located in the file <code>flag.txt</code>.",
+    "Hint 3: Files are uploaded to the <code>uploads/</code> directory.",
 ];
 
 $hint_message = "";
@@ -36,22 +36,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html>
 <body>
-    <h1>Przesyłanie plików</h1>
-    <p>Prześlij plik, aby odkryć flagę!</p>
+    <h1>File Upload</h1>
+    <p>Upload a file to discover the flag!</p>
     <form action="" method="POST" enctype="multipart/form-data">
         <input type="file" name="file">
-        <button type="submit">Prześlij</button>
+        <button type="submit">Upload</button>
     </form>
     
-    <h2>Potrzebujesz wskazówki?</h2>
+    <h2>Need a hint?</h2>
     <form action="" method="POST">
-        <button type="submit" name="hint1">Wskazówka 1</button>
-        <button type="submit" name="hint2">Wskazówka 2</button>
-        <button type="submit" name="hint3">Wskazówka 3</button>
+        <button type="submit" name="hint1">Hint 1</button>
+        <button type="submit" name="hint2">Hint 2</button>
+        <button type="submit" name="hint3">Hint 3</button>
     </form>
     
     <?php if (!empty($hint_message)): ?>
-        <p><strong>Wskazówka:</strong> <?php echo $hint_message; ?></p>
+        <p><strong>Hint:</strong> <?php echo $hint_message; ?></p>
     <?php endif; ?>
 </body>
 </html>

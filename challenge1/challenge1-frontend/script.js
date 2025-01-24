@@ -16,13 +16,20 @@ document.getElementById('login-form').addEventListener('submit', async function(
     document.getElementById('response').innerText = result;
 });
 
-document.getElementById('hint-btn').addEventListener('click', async () => {
-    try {
-        const response = await fetch('http://localhost:8081/hint');
-        const hint = await response.text();
-        document.getElementById('hint-response').innerText = hint;
-    } catch (error) {
-        console.error('Error fetching hint:', error);
-    }
+const hints = [
+    "Hint 1: Query: SELECT password FROM users WHERE username = '<username>'",
+    "Hint 2: Flag is in the flags table.",
+    "Hint 3: Try to use: UNION SELECT"
+];
+
+document.getElementById('hint-btn-1').addEventListener('click', () => {
+    document.getElementById('hint-response').innerText = hints[0];
 });
 
+document.getElementById('hint-btn-2').addEventListener('click', () => {
+    document.getElementById('hint-response').innerText = hints[1];
+});
+
+document.getElementById('hint-btn-3').addEventListener('click', () => {
+    document.getElementById('hint-response').innerText = hints[2];
+});

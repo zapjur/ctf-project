@@ -14,6 +14,9 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
@@ -23,6 +26,7 @@ h1 {
 
 .form-group {
     margin-bottom: 15px;
+    width: 100%;
 }
 
 label {
@@ -31,8 +35,8 @@ label {
 }
 
 input {
-    width: 100%;
-    padding: 8px;
+    width: 800px;
+    padding: 10px;
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -46,6 +50,7 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button:hover {
@@ -58,3 +63,17 @@ button:hover {
     color: red;
 }
 
+#hint-response {
+    margin-top: 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #333;
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
