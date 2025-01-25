@@ -18,7 +18,7 @@ public class UserService {
     }
 
     public User createAdmin(AdminDto adminDto){
-        boolean isValidAdmin = adminValidator.validate(adminDto.getAdminToken());
+        boolean isValidAdmin = adminValidator.validateByToken(adminDto.getAdminToken());
         if(isValidAdmin){
            return userDao.save(User.from(adminDto));
         }
