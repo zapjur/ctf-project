@@ -11,7 +11,7 @@ import lombok.Setter;
 public class LoginDto {
 
     @NotBlank(message = "email can not be blank")
-    @Size(min = 7, max = 20, message = "email length should be in range 7-20")
+    @Size(min = 7, max = 30, message = "email length should be in range 7-30")
     private String email;
 
     @NotBlank(message = "password can not be blank")

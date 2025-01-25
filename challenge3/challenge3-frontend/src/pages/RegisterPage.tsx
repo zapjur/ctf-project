@@ -11,23 +11,42 @@ const RegisterPage: React.FC = () => {
         isAdmin: boolean;
       }) => {
         try {
+          let response = null;
           if (data.isAdmin) {
-            // Wyślij zapytanie do endpointu dla administratora
-            await axios.post("http://localhost:8080/api/v1/users/create/admin", {
+            response = await axios.post("http://localhost:8083/api/v1/users/create/admin", {
               email: data.email,
               password: data.password,
-              adminToken: data.adminToken, 
+              adminToken: data.adminToken,
             });
           } else {
-            await axios.post("http://localhost:8080/api/v1/users/create/default", {
+            response = await axios.post("http://localhost:8083/api/v1/users/create/default", {
               email: data.email,
               password: data.password,
             });
           }
-          console.log("Registration successful for:", data);
+        
+          if (response.status === 201) {
+            console.log("Registration successful for:", data);
+            alert("Registration successful for " + data.email);
+          }
         } catch (error) {
-          console.error("Registration error:", error);
+          if (axios.isAxiosError(error)) {
+            if (error.response) {
+              if (error.response.status === 409) {
+                alert("Conflict error: " + error.response.data.messages); 
+              } else {
+                alert(`API error: ${error.response.status} - ${error.response.data.messages}`);
+              }
+            } else {
+              // Błąd bez odpowiedzi (np. problem z siecią)
+              alert("Network error: " + error.message);
+            }
+          } else {
+            // Inne typy błędów (nie Axios)
+            alert("Unexpected error: " + (error as Error).message);
+          }
         }
+        
       };
 
   return (

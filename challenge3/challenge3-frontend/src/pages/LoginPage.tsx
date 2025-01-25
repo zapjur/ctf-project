@@ -6,33 +6,35 @@ import axios from "axios";
 const LoginPage: React.FC = () => {
     const navigate = useNavigate();
     const handleLogin = async (data: { email: string; password: string }) => {
-        try {
-          const response = await axios.post("http://localhost:8080/api/v1/users/login", data, {
+      try {
+          const response = await axios.post("http://localhost:8083/api/v1/users/login", data, {
             headers: {
               "Content-Type": "application/json",
             },
           });
-          console.log(response);
+      
           if (response.status === 200) {
-            console.log("Login successful:", response.data);
-            console.log("user type: ", response.data.userType);
-            localStorage.setItem("authToken", response.data.userType)
-            if(response.data.userType === "USER"){
-                navigate("/user")
+            localStorage.setItem("authToken", response.data.userType);
+      
+            if (response.data.userType === "USER") {
+              navigate("/user");
+            } else if (response.data.userType === "ADMIN") {
+              navigate(`/admin/${data.email}`);
             }
-            if (response.data.userType === "ADMIN") {
-                navigate(`/admin/${data.email}`);
-              }
-              
-            console.log("User logged in successfully!");
           } else {
-            console.error("Unexpected response:", response);
+            alert("Unexpected response: " + JSON.stringify(response));
           }
         } catch (error) {
           if (axios.isAxiosError(error)) {
-            console.error("Axios error:", error.response?.data || error.message);
+            if (error.response) {
+              alert(`Axios Error: ${error.response.status} - ${error.response.data.messages || "Unknown error"}`);
+            } else if (error.request) {
+              alert("No response from server. Please check your network connection.");
+            } else {
+              alert("Error creating request: " + error.message);
+            }
           } else {
-            console.error("Unexpected error:", error);
+            alert("Unexpected error: " + (error as Error).message);
           }
         }
       };

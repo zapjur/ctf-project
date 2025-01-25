@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
@@ -17,6 +18,7 @@ public class User {
 
     @NotNull
     @NotEmpty
+    @Indexed(unique = true)
     private String email;
 
     @NotNull

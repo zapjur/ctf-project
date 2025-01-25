@@ -17,3 +17,36 @@ services:
     build: ./challenge2
     ports:
       - "82:80"
+
+  chall-3-backend:
+    build: 
+      context: ./challenge3/challenge3-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8083:8083"
+    depends_on:
+      - mongo
+  chall-3-frontend:
+    build: 
+      context: ./challenge3/challenge3-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "83:80"   
+    depends_on:
+      - chall-3-backend  
+
+  mongo:
+    image: mongo:6.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    expose: 
+      - "27017"
+    environment:
+      MONGO_INITDB_DATABASE: challenge3
+    volumes:
+      - mongo_data:/data/db 
+  
+volumes:
+  mongo_data:
+    

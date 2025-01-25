@@ -6,7 +6,6 @@ interface PrivateUserRouteProps {
 }
 
 const PrivateUserRoute: React.FC<PrivateUserRouteProps> = ({ children }) => {
-  // Sprawdź, czy użytkownik jest zalogowany (np. na podstawie tokena w localStorage)
   const isAuthenticated = !!localStorage.getItem("authToken") && localStorage.getItem("authToken") === "USER";
 
   return isAuthenticated ? (

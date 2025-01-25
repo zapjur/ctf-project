@@ -5,11 +5,11 @@ const UserPage: React.FC = () => {
       <div
         style={{
           display: "flex",
-          flexDirection: "column", // Ustaw układ w kolumnie
+          flexDirection: "column", 
           justifyContent: "center",
           alignItems: "center",
           height: "100vh",
-          textAlign: "center", // Wyśrodkowanie tekstu
+          textAlign: "center",
         }}
       >
         <h1>Welcome to the User Page!</h1>
