@@ -44,3 +44,21 @@ Aby ukończyć zadanie, należy znaleźć flagę w następującym formacie:
     FLAG{challenge-1-flag-xxxxxxxxxx}
 ```
 Flagę należy podać na platformie **UPEL**, aby zadanie zostało zaliczone.
+
+---
+
+# Zadanie 2: File Upload Vulnerability
+
+Adres strony: [http://localhost:82](http://localhost:82)
+
+Na stronie znajduje się formularz umożliwiający przesłanie pliku. Zadaniem uczestnika jest pozyskanie flagi, wykorzystując podatność serwera na atak typu **File Upload Vulnerability**.
+
+W celu ułatwienia rozwiązania zadania dostępne są 3 podpowiedzi, które można wykorzystać w trakcie rozgrywki.
+
+## Rozwiązanie
+
+Aby ukończyć zadanie, należy znaleźć flagę w następującym formacie:
+```bash
+    FLAG{challenge-2-flag-xxxxxxxxxx}
+```
+Flagę należy podać na platformie **UPEL**, aby zadanie zostało zaliczone.
