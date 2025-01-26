@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: Build and test with Gradle
-        run: ./gradlew build --no-daemon
+        run: cd challenge3/challenge3-backend && ./gradlew build --no-daemon
 
       - name: Run tests with Gradle
-        run: ./gradlew test --no-daemon
+        run: cd challenge3/challenge3-backend && ./gradlew test --no-daemon
