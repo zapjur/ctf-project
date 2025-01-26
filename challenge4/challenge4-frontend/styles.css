@@ -3,7 +3,12 @@ body {
     background-color: #f4f4f4;
     color: #333;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 100px; /* Ustala górny margines, aby zawartość była wyświetlana niżej */
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px; /* Dodaje przestrzeń poniżej tytułu */
 }
 
 input {
@@ -21,6 +26,7 @@ button {
     border: none;
     cursor: pointer;
     border-radius: 5px;
+    margin-bottom: 10px; /* Dodaje przestrzeń poniżej przycisku */
 }
 
 button:hover {
@@ -28,8 +34,19 @@ button:hover {
 }
 
 .response {
-    margin-top: 20px;
+    margin-top: 30px; /* Przesuwa odpowiedź trochę niżej */
     font-size: 18px;
+    font-weight: bold;
+}
+
+#hintBox {
+    margin-top: 30px; /* Przesuwa podpowiedzi w dół */
+    font-size: 16px;
+    color: #555;
+    background-color: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
 .hidden-button {

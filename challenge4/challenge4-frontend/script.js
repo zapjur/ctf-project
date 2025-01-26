@@ -11,7 +11,7 @@ async function submitKey() {
 
         if (response.ok) {
             const data = await response.json();
-            responseDiv.innerText = `Flag: ${atob(data.flag)}`; // Odszyfrowanie Base64
+            responseDiv.innerText = `Flag: ${atob(data.flag)}`; 
         } else {
             const error = await response.json();
             responseDiv.innerText = `Error: ${error.detail}`;
@@ -22,8 +22,19 @@ async function submitKey() {
 }
 
 function revealKey() {
-    console.log("Funkcja revealKey została wywołana!");
-    const xorKey = [83, 101, 99, 114, 101, 116, 49, 50, 51]; // Zakodowany klucz
-    const decodedKey = xorKey.map(c => String.fromCharCode(c ^ 42)).join('');
-    alert(`XORowany klucz: ${decodedKey}`);
+    alert(`XOR hexadecimal: ${536563726574313219}`);
+}
+
+function showHint(hintNumber) {
+    const hintBox = document.getElementById("hintBox");
+
+    // Treści hintów - możesz je edytować
+    const hints = {
+        1: "Sprawdź w inspektorze kod html, może coś tam znajdziesz",
+        2: "Teraz sprawdź czy ktoś czegoś nie ukrył w ciasteczkach",
+        3: "Na moje oko ktoś tu zrobił xor, chyba trzeba użyć jakiegoś kalkulatora online do xorowania"
+    };
+
+    // Wyświetl hint w polu
+    hintBox.innerText = hints[hintNumber];
 }
