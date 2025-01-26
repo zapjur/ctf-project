@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reverse Engineering CTF</title>
+    <link rel="stylesheet" href="styles.css"> 
+</head>
+<body>
+    <h1>Activation Key Challenge</h1>
+    <p>Enter the activation key to unlock the flag:</p>
+    <input type="text" id="keyInput" placeholder="Enter key here">
+    <button onclick="submitKey()">Submit</button>
+    <div class="response" id="response"></div>
+
+    <button class="hidden-button" onclick="revealKey()">Click me!</button>
+
+    <script src="script.js"></script> 
+</body>
+</html>
