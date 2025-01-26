@@ -85,3 +85,20 @@ Aby ukończyć zadanie, należy znaleźć flagę w następującym formacie:
 ```
 
 Flagę należy podać na platformie **UPEL**, aby zadanie zostało zaliczone.
+
+# Zadanie 4: Miscellaneous
+
+Adres strony: [http://localhost:84](http://localhost:84)
+
+Zadanie typu **Miscellaneous** to kategoria, która obejmuje różnorodne wyzwania, które nie pasują do innych kategorii. Może to być rozwiązanie zagadki, analiza pliku, dekodowanie tekstu, czy nawet rozwiązanie problemu matematycznego.
+
+W celu ułatwienia rozwiązania zadania dostępne są 3 podpowiedzi, które można wykorzystać w trakcie rozgrywki.
+
+## Rozwiązanie
+
+Aby ukończyć zadanie, należy znaleźć flagę w następującym formacie:
+```bash
+    FLAG{challenge-4-flag-xxxxxxxxxx}
+```
+
+Flagę należy podać na platformie **UPEL**, aby zadanie zostało zaliczone.
