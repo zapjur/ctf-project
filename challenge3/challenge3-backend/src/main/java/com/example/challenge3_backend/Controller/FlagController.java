@@ -19,7 +19,7 @@ public class FlagController {
     public ResponseEntity<Flag> getFlag(@PathVariable String email){
         boolean isAdmin = adminValidator.validateByEmail(email);
         if(isAdmin){
-            Flag flag = new Flag(LocalDateTime.now(), "CHALLENGE 3", "You successfully captured challenge 3 flag!! Congratulations");
+            Flag flag = new Flag(LocalDateTime.now(), "CHALLENGE 3", "FLAG{challenge-3-flag-364232423313}");
             return ResponseEntity.ok(flag);
         }
         else{
