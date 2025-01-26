@@ -20,7 +20,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: '17'
-
+          distribution: 'adoptopenjdk'
       - name: Build and test with Gradle
         run: cd challenge3/challenge3-backend && ./gradlew build --no-daemon
 
