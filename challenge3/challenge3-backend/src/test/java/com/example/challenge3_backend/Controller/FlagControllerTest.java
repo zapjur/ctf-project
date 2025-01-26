@@ -41,7 +41,7 @@ class FlagControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.task").value("CHALLENGE 3"))
-                .andExpect(jsonPath("$.message").value("You successfully captured challenge 3 flag!! Congratulations"));
+                .andExpect(jsonPath("$.message").value("FLAG{challenge-3-flag-364232423313}"));
     }
 
     @Test
