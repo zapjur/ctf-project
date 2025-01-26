@@ -2,11 +2,13 @@ package com.example.challenge3_backend.Domain;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@AllArgsConstructor
 public class UserDto {
 
     @NotBlank(message = "email can not be blank")
