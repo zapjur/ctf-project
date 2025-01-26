@@ -1,8 +1,7 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import base64
-from fastapi.staticfiles import StaticFiles
 import os
 
 app = FastAPI()
@@ -16,27 +15,28 @@ def encrypt_flag(flag: str):
 
 def validate_key(user_key: str) -> bool:
     """Waliduje klucz od użytkownika."""
-    # Zakodowany klucz (Secret123 zakodowany XOR-em z kluczem 42)
     encoded_key = [ord(c) ^ 42 for c in "Secret123"]
     decoded_key = ''.join(chr(c ^ 42) for c in encoded_key)
     return user_key == decoded_key
 
-def fake_verify(key: str) -> bool:
-    """Fałszywa funkcja weryfikująca klucz, aby zmylić gracza."""
-    fake_logic = ''.join(str(ord(char) + 1) for char in key)
-    return fake_logic == "123456"
-
 @app.post("/validate")
 async def validate_key_endpoint(request: KeyRequest):
     """Endpoint weryfikujący klucz użytkownika."""
-    if fake_verify(request.key):
-        raise HTTPException(status_code=400, detail="Invalid key.")  # Fałszywy trop
+    if request.key == "Secret123":
+        encrypted_flag = encrypt_flag("CTF{YouCrackedIt}")  # Szyfrujemy flagę
+        return {"flag": encrypted_flag}
     
     if validate_key(request.key):
         encrypted_flag = encrypt_flag("CTF{YouCrackedIt}")
         return {"flag": encrypted_flag}
     else:
         raise HTTPException(status_code=400, detail="Invalid key.")
+    
+@app.get("/cookies")
+def create_cookie(response: Response):
+    # Ustawiamy dwa ciasteczka:
+    response.set_cookie(key="fakesession", value="fake-cookie-session-value")
+    response.set_cookie(key="xor_hint", value="Drugi element xor to 42 (decimal)")
+    return {"message": "Cookies have been set!"}
 
-# Dodaj obsługę statycznych plików
 app.mount("/", StaticFiles(directory=os.path.join("..", "challenge4-frontend"), html=True), name="frontend")
