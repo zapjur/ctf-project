@@ -55,5 +55,6 @@ class FlagControllerTest {
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isForbidden());
     }
+
 }
 

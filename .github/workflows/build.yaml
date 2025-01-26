@@ -4,9 +4,13 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'challenge3/challenge3-backend/**'
   pull_request:
     branches:
       - main
+    paths:
+      - 'challenge3/challenge3-backend/**'
 
 jobs:
   test:
@@ -27,4 +31,5 @@ jobs:
 
       - name: Build and test with Gradle
         run: cd challenge3/challenge3-backend && ./gradlew build test --no-daemon
+
 
