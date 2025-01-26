@@ -21,8 +21,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Build and test with Gradle
-        run: cd challenge3/challenge3-backend && ./gradlew build --no-daemon
 
-      - name: Run tests with Gradle
-        run: cd challenge3/challenge3-backend && ./gradlew test --no-daemon
+      - name: Give execute permissions to gradlew
+        run: chmod +x challenge3/challenge3-backend/gradlew
+
+      - name: Build and test with Gradle
+        run: cd challenge3/challenge3-backend && ./gradlew build test --no-daemon
+
