@@ -36,7 +36,7 @@ async def validate_key_endpoint(request: KeyRequest):
 def create_cookie(response: Response):
     # Ustawiamy dwa ciasteczka:
     response.set_cookie(key="fakesession", value="fake-cookie-session-value")
-    response.set_cookie(key="xor_hint", value="Drugi element xor to 42")
+    response.set_cookie(key="xor_hint", value="Drugi element xor to 42 (decimal)")
     return {"message": "Cookies have been set!"}
 
 app.mount("/", StaticFiles(directory=os.path.join("..", "challenge4-frontend"), html=True), name="frontend")
