@@ -11,7 +11,7 @@ async function submitKey() {
 
         if (response.ok) {
             const data = await response.json();
-            responseDiv.innerText = `Flag: ${atob(data.flag)}`; 
+            responseDiv.innerText = `Flag: ${atob(data.flag)}`; // Dekodowanie flagi z base64
         } else {
             const error = await response.json();
             responseDiv.innerText = `Error: ${error.detail}`;
@@ -22,19 +22,19 @@ async function submitKey() {
 }
 
 function revealKey() {
-    alert(`XOR hexadecimal: ${536563726574313219}`);
+    const xorResult = "53 65 63 72 65 74 31 32 19";  // Zakodowana wartość XOR w formacie szesnastkowym
+    const responseDiv = document.getElementById("response");
+    alert(`1 z dwóch kluczy(hexdecimal): ${xorResult}`);
 }
 
 function showHint(hintNumber) {
     const hintBox = document.getElementById("hintBox");
 
-    // Treści hintów - możesz je edytować
     const hints = {
         1: "Sprawdź w inspektorze kod html, może coś tam znajdziesz",
-        2: "Teraz sprawdź czy ktoś czegoś nie ukrył w ciasteczkach",
+        2: "Teraz sprawdź czy ktoś czegoś nie ukrył w ciasteczkach(może jakieś /cookies pomoże jak nic w nich nie ma)",
         3: "Na moje oko ktoś tu zrobił xor, chyba trzeba użyć jakiegoś kalkulatora online do xorowania"
     };
 
-    // Wyświetl hint w polu
-    hintBox.innerText = hints[hintNumber];
+    hintBox.innerText = hints[hintNumber];  // Wyświetlanie tekstu w elemencie hintBox
 }
