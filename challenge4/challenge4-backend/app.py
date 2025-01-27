@@ -3,8 +3,17 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import base64
 import os
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class KeyRequest(BaseModel):
     key: str
@@ -38,5 +47,3 @@ def create_cookie(response: Response):
     response.set_cookie(key="fakesession", value="fake-cookie-session-value")
     response.set_cookie(key="xor_hint", value="Drugi element xor to 42 (decimal)")
     return {"message": "Cookies have been set!"}
-
-app.mount("/", StaticFiles(directory=os.path.join("..", "challenge4-frontend"), html=True), name="frontend")
