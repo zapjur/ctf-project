@@ -22,7 +22,7 @@ async function submitKey() {
 }
 
 function revealKey() {
-    const xorResult = "53 65 63 72 65 74 31 32 19";  
+    const xorResult = "536563726574313219";  
     const responseDiv = document.getElementById("response");
     alert(`1 z dwóch kluczy(hexdecimal): ${xorResult}`);
 }
