@@ -38,3 +38,23 @@ function showHint(hintNumber) {
 
     hintBox.innerText = hints[hintNumber];  
 }
+
+async function fetchCookies() {
+    const responseDiv = document.getElementById("response");
+
+    try {
+        const response = await fetch("http://localhost:8000/cookies", {
+            method: "GET",
+            credentials: "include",  // Allow cookies to be sent
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            responseDiv.innerText = `Message: ${data.message}`;
+        } else {
+            responseDiv.innerText = "Failed to fetch cookies.";
+        }
+    } catch (err) {
+        responseDiv.innerText = "An error occurred while fetching cookies.";
+    }
+}

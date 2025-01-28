@@ -15,6 +15,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
+
 class KeyRequest(BaseModel):
     key: str
 
@@ -44,6 +48,6 @@ async def validate_key_endpoint(request: KeyRequest):
 @app.get("/cookies")
 def create_cookie(response: Response):
     # Ustawiamy dwa ciasteczka:
-    response.set_cookie(key="fakesession", value="fake-cookie-session-value")
-    response.set_cookie(key="xor_hint", value="Drugi element xor to 42 (decimal)")
+    response.set_cookie(key="fakesession", value="fake-cookie-session-value", samesite="None", secure=True)
+    response.set_cookie(key="xor_hint", value="Drugi element xor to 42 (decimal)", samesite="None", secure=True)
     return {"message": "Cookies have been set!"}
